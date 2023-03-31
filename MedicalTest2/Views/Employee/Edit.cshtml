@@ -1,0 +1,341 @@
+﻿@model MedicalTest2.ViewModels.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<link href="~/css/bootstrap4-toggle.min.css" rel="stylesheet" />
+
+<h4>تعديل موظف</h4>
+<hr />
+@if (string.IsNullOrEmpty(ViewBag.NoDataError))
+{
+
+    <section class="appointment section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>بيانات الموظف</h2>
+            </div>
+
+            <form asp-route-returnUrl="@Model.ReturnUrl" asp-action="Edit">
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label asp-for="FirstName" class="control-label"></label>
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="SecondName" class="control-label"></label>
+                        <input asp-for="SecondName" class="form-control" />
+                        <span asp-validation-for="SecondName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="FamilyName" class="control-label"></label>
+                        <input asp-for="FamilyName" class="form-control" />
+                        <span asp-validation-for="FamilyName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="NationalityId" class="control-label"></label>
+                        <select asp-for="NationalityId" class="form-select" asp-items="@(new SelectList(Model.Nationalities, "Id", "Name"))"></select>
+                        <span asp-validation-for="NationalityId" class="text-danger"> </span>
+                        @if (@ViewBag.NationalityErrorId != null)
+                        {
+                            <span class="text-danger"> @ViewBag.NationalityErrorId</span>
+
+                        }
+                    </div>
+                </div>
+                <div class="row  mt-3">
+                    <div class="col-md-3 form-group mt-md-0">
+                        <label asp-for="NationalId" class="control-label"></label>
+                        <input asp-for="NationalId" class="form-control" />
+                        <span asp-validation-for="NationalId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 ">
+                        <label class="control-label">الجنس  </label>
+
+                        <div class="form-control">
+
+
+                            @foreach (var item in Model.Genders)
+                            {
+
+                                <input type="radio" name="GenderId" class="form-check-input" for="@item.Id" value="@item.Id" checked="@item.IsSelected">
+                                <label class="form-check-label" for="@item.Id">@item.Name</label>
+
+                            }
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 form-group  mt-md-0">
+                        <label asp-for="BitrhDate" class="control-label">التاريخ الميلادى</label>
+                        <input type="date" class="form-control" data-date-start-date="+0d" asp-for="BitrhDate" />
+                        <span asp-validation-for="BitrhDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3 form-group  mt-md-0">
+                        <label asp-for="ComputerNumber" class="control-label"></label>
+                        <input asp-for="ComputerNumber" class="form-control" />
+                        <span asp-validation-for="ComputerNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        @*<input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" required>*@
+                        <label asp-for="DestinationId" class="control-label"></label>
+                        <select asp-for="DestinationId" class="form-select" asp-items="@(new SelectList(Model.Destinations, "Id", "Name"))"></select>
+                        <span asp-validation-for="DestinationId" class="text-danger"> </span>
+                        @if (@ViewBag.DestinationErrorId != null)
+                        {
+                            <span class="text-danger"> @ViewBag.DestinationErrorId</span>
+
+                        }
+                    </div>
+
+                    <div class="col-md-3 form-group ">
+                        <label asp-for="DepartmentId" class="control-label"></label>
+                        <select asp-for="DepartmentId" class="form-select" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))"></select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"> </span>
+                        @if (@ViewBag.DepartmentErrorId != null)
+                        {
+                            <span class="text-danger"> @ViewBag.DepartmentErrorId</span>
+
+                        }
+                    </div>
+                    <div class="col-md-3 form-group ">
+                        <label asp-for="ActualWorkId" class="control-label"></label>
+                        <select asp-for="ActualWorkId" class="form-select" asp-items="@(new SelectList(Model.ActualWorks, "Id", "Name"))"></select>
+                        <span asp-validation-for="ActualWorkId" class="text-danger"> </span>
+                        @if (@ViewBag.ActualWorkErrorId != null)
+                        {
+                            <span class="text-danger"> @ViewBag.ActualWorkErrorId</span>
+
+                        }
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-3 form-group ">
+                        <label asp-for="JobCategoryId" class="control-label"></label>
+                        <select asp-for="JobCategoryId" class="form-select" asp-items="@(new SelectList(Model.JobCategories, "Id", "Name"))"></select>
+                        <span asp-validation-for="JobCategoryId" class="text-danger"> </span>
+                        @if (@ViewBag.JobCategoryErrorId != null)
+                        {
+                            <span class="text-danger"> @ViewBag.JobCategoryErrorId</span>
+
+                        }
+                    </div>
+                    <div class="col-md-3 ">
+                        <label class="control-label">نوع التعيبن </label>
+                        <div class="form-control">
+                            @foreach (var item in Model.WorkTypes)
+                            {
+                                <input type="radio" class="form-check-input" for="@item.Id" name="WorkTypeId" value="@item.Id" checked="@item.IsSelected">
+                                <label class="form-check-label" for="@item.Id">@item.Name</label>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                @*<div class="row mt-3">
+                        <div class="col-md-3 form-group">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input type="password" asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label asp-for="ConfirmPassword" class="control-label"></label>
+                            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                    </div>*@
+
+                @if (Model.EmployeeAttachments.Count > 0)
+                {
+                    <div class="row mt-3">
+                        <div class="repeater">
+                            <table class="repeater1">
+                                <tbody data-repeater-list="EmployeeAttachments">
+
+                                    @foreach (var attachment in Model.EmployeeAttachments)
+                                    {
+                                        <tr data-repeater-item>
+                                            @*<input type="hidden" asp-for="Id" />*@
+                                            <input type="hidden" asp-for="Id" name="EmployeeId" />
+                                            @*<input type="hidden" asp-for="@attachment.AttachmentId" name="AttachmentId" />*@
+
+                                            <td>
+                                                <div>
+                                                    <div class="row d-flex align-items-end">
+
+
+                                                        <div class="col-md-4 form-group">
+                                                            <label asp-for="@attachment.AttachmentId" class="control-label"></label>
+                                                            <select asp-for="@attachment.AttachmentId" name="AttachmentId" class="form-select" asp-items="@(new SelectList(Model.Attachments, "Id", "Name"))"></select>
+                                                            <span asp-validation-for="@attachment.AttachmentId" class="text-danger"> </span>
+                                                        </div>
+                                                        <div class="col-md-4 form-group  mt-md-0">
+                                                                <label for="@attachment.From">من</label>
+                                                                <input asp-for="@attachment.From" name="From" class="form-control" placeholder="YYYY-MM-DD" />
+                                                                <span asp-validation-for="@attachment.From" class="text-danger"></span>
+                                                            </div>
+                                                            <div class="col-md-4 form-group  mt-md-0">
+                                                                <label for="@attachment.To">الى</label>
+                                                                <input asp-for="@attachment.To" name="To" class="form-control" placeholder="YYYY-MM-DD" />
+                                                                <span asp-validation-for="@attachment.To" class="text-danger"></span>
+                                                            </div>
+                                                        @*<div class="col-md-4 form-group  mt-md-0">
+                                                            <label asp-for="@attachment.From" class="control-label">من </label>
+                                                            <input type="date" class="form-control" data-date-start-date="+0d" asp-for="@attachment.From" />
+                                                            <span asp-validation-for="@attachment.From" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="col-md-4 form-group  mt-md-0">
+                                                            <label asp-for="@attachment.To" class="control-label"> الى</label>
+                                                            <input type="date" class="form-control" data-date-start-date="+0d" asp-for="@attachment.To" />
+                                                            <span asp-validation-for="@attachment.To" class="text-danger"></span>
+                                                        </div>*@
+                                                    </div>
+                                                    <hr />
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <input data-repeater-delete type="button" value="حذف" />
+                                            </td>
+                                        </tr>
+
+                                    }
+                                    <input data-repeater-create type="button" value="إضافة مرفق جديد" />
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                }
+                else
+                {
+
+
+                    <div class="row mt-3">
+                        <div class="repeater">
+                            <table class="repeater1">
+                                <tbody data-repeater-list="EmployeeAttachments">
+                                    <tr data-repeater-item>
+                                        @*<input type="hidden" asp-for="Id" name="EmployeeId" />*@
+
+                                        <td>
+                                            <div>
+                                                <div class="row d-flex align-items-end">
+                                                    <div class="col-md-4 form-group">
+                                                        <label asp-for="AttachmentId" class="control-label"></label>
+                                                        <select asp-for="AttachmentId" class="form-select" asp-items="@(new SelectList(Model.Attachments, "Id", "Name"))"></select>
+                                                        <span asp-validation-for="AttachmentId" class="text-danger"> </span>
+                                                        @*  @if (@ViewBag.DestinationErrorId != null)
+                                                            {
+                                                            <span class="text-danger"> @ViewBag.DestinationErrorId</span>
+
+                                                            }*@
+                                                    </div>
+                                                    <div class="col-md-4 form-group  mt-md-0">
+                                                        <label asp-for="From" class="control-label">من </label>
+                                                        <input type="date" class="form-control" value="" data-date-start-date="+0d" asp-for="From" />
+                                                        <span asp-validation-for="From" class="text-danger"></span>
+                                                    </div>
+                                                    <div class="col-md-4 form-group  mt-md-0">
+                                                        <label asp-for="To" class="control-label"> الى</label>
+                                                        <input type="date" class="form-control" value="" data-date-start-date="+0d" asp-for="To" />
+                                                        <span asp-validation-for="To" class="text-danger"></span>
+                                                    </div>
+                                                    @*     <div class="col-md-4 form-group  mt-md-0">
+                                                        <label asp-for="From" class="control-label">من</label>
+                                                        <input type="date" class="form-control" asp-for="From" />
+                                                        <span asp-validation-for="From" class="text-danger"></span>
+                                                        </div>*@
+                                                    @*   <div class="col-md-4 form-group  mt-md-0">
+                                                        <label asp-for="To" class="control-label">الى</label>
+                                                        <input type="date" class="form-control" asp-for="To" />
+                                                        <span asp-validation-for="To" class="text-danger"></span>
+                                                        </div>
+                                                    *@
+
+                                                    @* <div class="col-md-2 col-12  DeleteDiv" id="DeleteDiv">
+                                                        <div class="form-group">
+                                                        <button id="Deletebutton" class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button" onclick="DeleteQ()">
+                                                        <i data-feather="x" class="mr-25"></i>
+                                                        <span>Delete</span>
+                                                        </button>
+                                                        </div>
+                                                        </div>*@
+                                                </div>
+                                                <hr />
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            <input data-repeater-delete type="button" value="حذف" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <input data-repeater-create type="button" value="إضافة مرفق جديد" />
+
+                            </table>
+                        </div>
+
+
+
+                        @*   <div class="col-md-1 form-group mt-3 mt-md-0">
+                            <div>
+                            <label class="control-label"></label>
+                            <div>
+                            <input style="width: 140px!important;height: 40px!important;" type="checkbox" asp-for="EmployeeAttachment.Attachment.AllowNotification" name="allowNotification" checked data-toggle="toggle" data-on="السماح بالاشعارت" data-off="رفض" data-onstyle="danger" data-offstyle="success">
+                            </div>
+                            </div>
+                            </div>*@
+                    </div>
+                }
+                <div class="text-center mt-3">
+                    <div style="font-size:larger" asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="submit" value="حفظ" class="btn btn-primary" />
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+}
+else
+{
+    <span class="text-danger"> @ViewBag.NoDataError</span>
+}
+
+<div>
+    <a asp-action="Index">العودة للقائمة</a>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/bootstrap4-toggle.min.js"></script>
+
+@*<script src="~/js/jquery.repeater.min.js"></script>
+    <script src="~/js/form-repeater.js"></script>*@
+
+<script src="~/js/jquery_js.js"></script>
+<script src="~/js/jquery__repeater.js"></script>
+<script>
+    $('.repeater').repeater();
+</script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

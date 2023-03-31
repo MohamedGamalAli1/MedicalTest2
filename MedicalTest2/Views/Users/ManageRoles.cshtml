@@ -1,0 +1,43 @@
+﻿@model UserRolesViewModel
+
+@{
+    ViewData["Title"] = "Manage Roles";
+}
+
+<form a method="post" asp-action="ManageRoles">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>@Model.UserName</h2>
+            حفظ او تعديل الصلاحيات
+        </div>
+        <div class="card-body">
+            <input type="hidden" asp-for="UserId" />
+            @for (int i = 0; i < Model.RolesCmBoxes.Count; i++)
+            {
+                @*<div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model.RolesCmBoxes[i].RoleName" />
+                    <input type="checkbox" asp-for="@Model.RolesCmBoxes[i].IsChecked" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model.RolesCmBoxes[i].IsChecked">
+                        @Model.RolesCmBoxes[i].RoleName
+                    </label>
+                </div>*@
+                <div class="form-group">
+                    <div class="checkbox">
+                        <input type="hidden" asp-for="@Model.RolesCmBoxes[i].RoleName" />
+                        <input type="checkbox" asp-for="@Model.RolesCmBoxes[i].IsChecked" class="form-check-input" />
+                        <label class="form-check-label" asp-for="@Model.RolesCmBoxes[i].IsChecked">
+                            @Model.RolesCmBoxes[i].RoleName
+                        </label>
+                    </div>
+                </div>
+            }
+            <div asp-validation-summary="All" class="text-danger">
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary" >حفظ</button>
+            <a  asp-action="Index" class="btn btn-secondary">رجوع</a>
+        </div>
+    </div>
+</form>

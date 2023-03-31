@@ -1,0 +1,42 @@
+﻿@model MedicalTest2.Models.SendSMSDto
+
+@{
+    ViewData["Title"] = "Send";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+<h1>Send</h1>
+
+<h4>الاشعارات</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Send">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @*    <div class="form-group">
+                <label asp-for="MobileNumber" class="control-label"></label>
+                <input asp-for="MobileNumber" class="form-control" />
+                <span asp-validation-for="MobileNumber" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input asp-for="@Model.EmployeeAttachment.Employee.PhoneNumber" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Body" class="control-label">الرسالة</label>
+                <input asp-for="Body"  class="form-control" />
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

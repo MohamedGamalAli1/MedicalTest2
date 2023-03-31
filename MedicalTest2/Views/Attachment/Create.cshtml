@@ -1,0 +1,42 @@
+﻿@model MedicalTest2.Models.Attachment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>إضافة اسم مرفق جديد</h4>
+<link href="~/css/bootstrap4-toggle.min.css" rel="stylesheet" />
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-md-1 form-group mt-3 mt-md-0">
+                <label class="control-label" >السماح بالاشعارات</label>
+                <div>
+                    <input type="checkbox" asp-for="AllowNotification" name="AllowNotification" checked data-toggle="toggle" data-on="نعم" data-off="لا" data-onstyle="danger" data-offstyle="success">
+                </div>
+            </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="حفظ" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Index">العودة للقائمة</a>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/bootstrap4-toggle.min.js"></script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

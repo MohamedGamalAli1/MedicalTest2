@@ -1,0 +1,123 @@
+﻿@model MedicalTest2.Models.SendSMSDto
+
+@{
+    ViewData["Title"] = "Send";
+    Layout = "~/Views/Shared/_LayoutMaster.cshtml";
+}
+
+<h1>ارسال</h1>
+@if(@Model.EmployeeAttachment.Employee!=null){
+    <div class="container-fluid">
+
+        <div class="container">
+            <!-- Title -->
+            <div class="d-flex justify-content-between align-items-center py-3">
+                <h2 class="h5 mb-0">
+                    <a href="#" class="text-muted"></a> رقم الموظف
+                    @Model.EmployeeAttachment.Employee.Id
+                </h2>
+            </div>
+
+            <!-- Main content -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Details -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex mb-2">
+                                                <div class="flex-lg-grow-1 ms-3">
+                                                    <h6 class="small mb-0"><a href="#" class="text-reset">اسم الموظف</a></h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@Model.EmployeeAttachment.Employee.FirstName @Model.EmployeeAttachment.Employee.SecondName @Model.EmployeeAttachment.Employee.FamilyName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex mb-2">
+                                                <div class="flex-lg-grow-1 ms-3">
+                                                    <h6 class="small mb-0"><a href="#" class="text-reset">البريد الالكترونى</a></h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@Model.EmployeeAttachment.Employee.Email</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex mb-2">
+                                                <div class="flex-lg-grow-1 ms-3">
+                                                    <h6 class="small mb-0"><a href="#" class="text-reset">رقم الجوال</a></h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@Model.EmployeeAttachment.Employee.PhoneNumber</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex mb-2">
+                                                <div class="flex-lg-grow-1 ms-3">
+                                                    <h6 class="small mb-0"><a href="#" class="text-reset">رقم الحاسب</a></h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@Model.EmployeeAttachment.Employee.ComputerNumber</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex mb-2">
+                                                <div class="flex-lg-grow-1 ms-3">
+                                                    <h6 class="small mb-0"><a href="#" class="text-reset">اسم المستخدم</a></h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@Model.EmployeeAttachment.Employee.NationalId</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<h4>الاشعارات</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Send">
+            <input asp-for="@Model.EmployeeAttachment.Id" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+         @*   <div class="form-group">
+                <label asp-for="@Model.EmployeeAttachment.Employee.PhoneNumber" class="control-label"></label>
+                <input asp-for="@Model.EmployeeAttachment.Employee.PhoneNumber" class="form-control" />
+                <span asp-validation-for="@Model.EmployeeAttachment.Employee.PhoneNumber" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input asp-for="@Model.EmployeeAttachment.Employee.PhoneNumber" type="hidden" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Body" class="control-label">الرسالة</label>
+                <input asp-for="Body" class="form-control" />
+                <span asp-validation-for="Body" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2" >
+                <input type="submit" value="ارسال" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Details" >العودة للقائمة</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

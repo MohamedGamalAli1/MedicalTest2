@@ -1,0 +1,32 @@
+﻿@model MedicalTest2.Models.EmployeeCategory
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>إضافة تصنيف جديد</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">الإسم</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group  mt-3">
+                <input type="submit" value="إضافة" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">العودة للقائمة</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
