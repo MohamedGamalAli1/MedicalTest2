@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MedicalTest2.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>بيانات الموظفين</h1>
+
+
+<a asp-action="Create" class="btn btn-primary"><span class="fa fa-plus"></span> &nbsp; إضافة موظف جديد</a>
+
+<table class="table table-active table-striped  table-bordered  mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <td>
+                @Html.Label("الرقم")
+            </td>
+            <td>
+                @Html.Label("الإسم")
+            </td>
+            <td>
+                @Html.Label("الوصف")
+            </td>
+            <td>
+                @Html.Label("الصورة")
+            </td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @if (item.ImageUrl != null)
+                    {
+                        <img src="~/uploads/@item.ImageUrl" alt="Alternate Text" style="height:100px;width:50px" />
+                    }
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                    <a asp-controller="Patient" asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.Id">تعديل</a>
+                    <a asp-controller="Patient" asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

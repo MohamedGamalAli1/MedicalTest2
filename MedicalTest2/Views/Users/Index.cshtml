@@ -1,0 +1,44 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "Users with roles";
+}
+
+<h1>المستخدمين</h1>
+<a asp-action="Add" class="btn btn-primary"><span class="fa fa-plus"></span> &nbsp; إضافة مستخدم جديد</a>
+<table class="table table-active table-striped  table-bordered  mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <td>
+                @Html.Label("الإسم")
+            </td>
+            <td>
+                @Html.Label("البريد الالكترونى")
+            </td>
+            <td>
+                @Html.Label("رقم الجوال")
+            </td>
+            <td>
+                @Html.Label("الصلاحيات")
+            </td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>@string.Join(" , ", @user.Roles.ToList())</td>
+                <td>
+                    <a asp-controller="Users" asp-action="ManageRoles" class="btn btn-success" asp-route-userId="@user.Id">الصلاحيات</a>
+                    <a asp-controller="Users" asp-action="Edit" class="btn btn-outline-success" asp-route-userId="@user.Id">تعديل</a>
+                    <a href="javascript:;" data-id="@user.Id" class="btn btn-danger js-delete">حذف</a>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

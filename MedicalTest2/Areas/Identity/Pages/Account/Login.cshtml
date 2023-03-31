@@ -1,0 +1,123 @@
+﻿@page
+@model LoginModel
+
+@{
+    //ViewData["Title"] = "تسجيل الدخول";
+    Layout = "_LayoutLogin";
+}
+
+@*<h1>@ViewData["Title"]</h1>*@
+@*<div class="row">
+        <div class="col-md-4">
+            <section>
+                <form id="account" method="post">
+                    <h4>Use a local account to log in.</h4>
+                    <hr />
+                    <div class="form-group">
+                        <label asp-for="Input.Name">اسم المستخدم</label>
+                        <input asp-for="Input.Name" class="form-control" />
+                        <span asp-validation-for="Input.Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password">الرقم القومى</label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <button type="submit" class="btn btn-primary">دخول</button>
+                    </div>
+                    <div class="form-group mt-4">
+                        <p>
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">تسجيل اشتراك</a>
+                        </p>
+                    </div>
+                </form>
+            </section>
+        </div>
+
+    </div>*@
+
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" method="post" style="direction:rtl">
+                <span class="login100-form-title p-b-43">
+                    تسجيل الدخول
+                </span>
+
+
+                <div class="wrap-input100 validate-input" @*data-validate="Valid email is required: ex@abc.xyz"*@>
+                    <input class="input100" type="text" asp-for="Input.Name">
+                    <span class="focus-input100"></span>
+                    <span asp-for="Input.Name" class="label-input100">اسم المستخدم</span>
+                    @*<span asp-validation-for="Input.Name" class="text-danger"></span>*@
+                </div>
+                @*<div class="form-group">
+            <label asp-for="Input.Password">الرقم القومى</label>
+            <input asp-for="Input.Password" class="form-control" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>*@
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input asp-for="Input.Password" class="input100" type="password">
+                    <span class="focus-input100"></span>
+                    <span asp-for="Input.Password" class="label-input100">الرقم السرى</span>
+                </div>
+
+                @*<div class="flex-sb-m w-full p-t-3 p-b-32">
+            <div class="contact100-form-checkbox">
+                <label asp-for="Input.RememberMe">
+                    <input  asp-for="Input.RememberMe" />
+                    @Html.Label("تذكرنى")
+                </label>
+            </div>
+        </div>*@
+                @*<div class="flex-sb-m w-full p-t-3 p-b-32">
+            <div class="contact100-form-checkbox">
+                <label asp-for="Input.RememberMe" class="label-checkbox100">
+                    تذكرنى
+                </label>
+                <input asp-for="Input.RememberMe" class="input-checkbox100" type="checkbox">
+
+            </div>
+
+
+        </div>*@
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="container-login100-form-btn">
+
+
+                    <button type="submit" class="login100-form-btn">
+                        دخول
+                    </button>
+                </div>
+                <div class="form-group mt-4" style=" text-align: center;">
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">اذا لم تملك حساب قم بتسجيل الاشتراك</a>
+                    </p>
+                </div>
+            </form>
+            <div class="login100-more" style="background-image: url('../../Login_v18/images/bg-01.jpg'); ">
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

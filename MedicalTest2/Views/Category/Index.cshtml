@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MedicalTest2.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>التصنيف </h1>
+
+<a asp-action="Create" class="btn btn-primary"><span class="fa fa-plus"></span> &nbsp; إضافة تصنيف جديد</a>
+
+<table class="table table-active table-striped  table-bordered  mt-4">
+    <thead>
+        <tr class="bg-primary text-white">
+            <th>
+                @Html.Label("الرقم")
+            </th>
+            <th>
+                @Html.Label("الإسم")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-controller="Category" asp-action="Details" class="btn btn-success" asp-route-userId="@item.Id">تفاصيل</a>
+                    <a asp-controller="Category" asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.Id">تعديل</a>
+                    <a asp-controller="Category" asp-action="Delete" class="btn btn-danger" asp-route-id="@item.Id">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
